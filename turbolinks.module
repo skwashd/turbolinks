@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * Implements hook_page_attachments().
+ */
+function turbolinks_page_attachments(array &$page) {
+  $request = \Drupal::request();
+
+  // Turbolinks is only sensible when there is an actual session (otherwise the
+  // entire page can be cached by the page_cache module, and be sent more
+  // quickly than Turbolinks could).
+  // @see \Drupal\big_pipe\Render\Placeholder\BigPipeStrategy.
+  $session_exists = \Drupal::service('session_configuration')->hasSession($request);
+
+  $page['#cache']['contexts'][] = 'session.exists';
+  if ($session_exists) {
+    $page['#attached']['library'][] = 'turbolinks/turbolinks';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for region templates.
+ */
+function turbolinks_preprocess_region(&$variables) {
+  $variables['attributes']['data-turbolinks-region'] = $variables['region'];
+}

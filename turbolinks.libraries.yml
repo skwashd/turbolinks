@@ -1,0 +1,9 @@
+turbolinks:
+  version: VERSION
+  js:
+    js/turbolinks.js: { attributes: { defer: true }}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal.ajax
+    - core/drupalSettings

@@ -1,0 +1,16 @@
+services:
+  turbolinks.page_state:
+    class: Drupal\turbolinks\TurbolinksPageState
+    arguments: ['@cache_contexts_manager', '@csrf_token']
+
+  turbolinks.html_response.subscriber:
+    class: Drupal\turbolinks\EventSubscriber\HtmlResponseSubscriber
+    arguments: ['@turbolinks.page_state']
+    tags:
+      - { name: event_subscriber }
+
+  main_content_renderer.turbolinks:
+    class: Drupal\turbolinks\Render\MainContent\TurbolinksRenderer
+    arguments: ['@main_content_renderer.html', '@turbolinks.page_state']
+    tags:
+      - { name: render.main_content_renderer, format: drupal_turbolinks }

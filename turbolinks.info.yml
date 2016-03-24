@@ -1,0 +1,11 @@
+name: Turbolinks
+type: module
+description: 'Turbolinks makes navigating your web site faster by only loading the parts that change between pages.'
+# version: VERSION
+# core: 8.x
+
+# Information added by Drupal.org packaging script on 2016-03-22
+version: '8.x-1.0-alpha1'
+core: '8.x'
+project: 'turbolinks'
+datestamp: 1458662049
